@@ -154,3 +154,5 @@ Para obtener el NodePort asignado:
 kubectl get svc -n mlops-proyecto3 streamlit-ui-service
 ```
 ![alt text](streamlit.png)
+
+![alt text](streamlit-2.png)
