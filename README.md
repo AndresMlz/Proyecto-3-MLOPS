@@ -128,3 +128,29 @@ curl -X POST http://localhost:8081/predict \
 - Inferencias por estado (success / error)
 
 ![alt text](image-6.png)
+
+## 9. 📊 Streamlit
+
+
+## Acceso a la interfaz de Streamlit
+
+La interfaz de usuario de Streamlit estará disponible en:
+
+http://<IP_DE_MINIKUBE>:<NODEPORT>
+
+Por ejemplo, si tu IP de Minikube es `192.168.49.2` y el puerto asignado es `30433`:
+
+http://192.168.49.2:30433
+
+> **Nota:** Esta URL solo es accesible desde tu máquina local o red donde corre Minikube.
+
+Para obtener la IP de Minikube:
+```bash
+minikube ip
+```
+
+Para obtener el NodePort asignado:
+```bash
+kubectl get svc -n mlops-proyecto3 streamlit-ui-service
+```
+![alt text](image-6.png)
