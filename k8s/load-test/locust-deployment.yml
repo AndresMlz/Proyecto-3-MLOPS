@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: locust
+  labels:
+    app: locust
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: locust
+  template:
+    metadata:
+      labels:
+        app: locust
+    spec:
+      containers:
+        - name: locust
+          image: locustio/locust:2.24.1
+          args: ["-f", "/mnt/locust/locustfile.py", "--host=http://inference-api", "--web-host=0.0.0.0"]
+          ports:
+            - containerPort: 8089
+          volumeMounts:
+            - name: locustfile-volume
+              mountPath: /mnt/locust
+      volumes:
+        - name: locustfile-volume
+          configMap:
+            name: locustfile-config
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: locust-service
+spec:
+  type: NodePort
+  selector:
+    app: locust
+  ports:
+    - protocol: TCP
+      port: 8089
+      targetPort: 8089
+      nodePort: 30089
